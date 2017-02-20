@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="course" required="true" type="domain.Course"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:panelGroup layout="block" class="form-group">
+            <h:outputLabel for="courseId" value="Course ID #{cc.attrs.course.id}" />
+            <h:inputHidden class="form-control" id="courseId" value="#{cc.attrs.course.id}" />
+        </h:panelGroup>
+
+        <h:panelGroup layout="block" class="form-group">
+            <h:outputLabel for="courseTitle" value="Course Title" />
+            <h:inputText class="form-control" id="courseTitle" value="#{cc.attrs.course.title}" />
+            <h:messages for="courseTitle" style="color:red" />
+        </h:panelGroup>
+
+        <h:panelGroup layout="block" class="form-group">
+            <h:outputLabel for="courseId1" value="Course ID"/>
+            <h:inputText class="form-control" id="courseId1" value="#{cc.attrs.course.courseId}" />
+            <h:messages for="courseId1" style="color:red" />
+        </h:panelGroup>
+
+        <h:panelGroup layout="block" class="form-group">
+            <h:outputLabel for="dateRegistered" value="DoP"/>
+            <h:inputText class="form-control" id="dateRegistered" value="#{cc.attrs.course.dateRegistered}">
+                <f:convertDateTime type="date" dateStyle="short"/>
+            </h:inputText>
+            <h:messages for="dateRegistered" style="color:red" />
+        </h:panelGroup>
+
+        <h:panelGroup layout="block" class="form-group">
+            <h:outputLabel for="courseTeacher" value="Teacher"/>
+            <h:selectOneListbox class="form-control" id="courseTeacher"  value="#{cc.attrs.course.teacher.id}" >
+                <f:selectItems value="#{teacherBean.findAll()}" var="teacher" itemLabel="#{teacher.name}" itemValue="#{teacher.id}"/>
+            </h:selectOneListbox>
+            <h:messages for="courseTeacher" style="color:red" />
+        </h:panelGroup>
+
+    </cc:implementation>
+</html>
